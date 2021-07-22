@@ -32,6 +32,7 @@ class Boot03ApplicationTests {
         }
     }
 
+    //제목 검색 기능 테스트
     @Test
     public void testByTitle() {
         //Java8
@@ -39,6 +40,7 @@ class Boot03ApplicationTests {
                 .forEach(board -> System.out.println(board));
     }
 
+    //작성자 검색기능 테스트
     @Test
     public void testByWriter() {
         Collection<Board> result = repo.findByWriter("user00");
@@ -48,10 +50,26 @@ class Boot03ApplicationTests {
         );
     }
 
+    //확장된 작성자 이름에 검색
     @Test
     public void testByWriterContaning() {
         Collection<Board> results = repo.findByWriterContaining("05");
 
+        results.forEach(board -> System.out.println(board));
+    }
+    //제목과 부등호 검색
+    @Test
+    public void testByTitleAndBno() {
+        Collection<Board> results =
+                repo.findByTitleContainingAndBnoGreaterThan("5", 50L);
+
+        results.forEach(board -> System.out.println(board));
+    }
+
+    @Test
+    public void testBnoOrderBy() {
+        Collection<Board> results =
+                repo.findByBnoGreaterThanOrderByBnoDesc(90L);
         results.forEach(board -> System.out.println(board));
     }
 }
